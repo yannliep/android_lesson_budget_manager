@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/history"
+        android:icon="@drawable/ic_history_24dp"
+        android:title="@string/history" />
+    <item
+        android:id="@+id/categories"
+        android:icon="@drawable/ic_folder_24dp"
+        android:title="@string/categories" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings_24dp"
+        android:title="@string/settings" />
+</menu>

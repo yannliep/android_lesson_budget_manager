@@ -26,11 +26,11 @@ public class HistoryViewModel extends AndroidViewModel {
         return historyDAO.getById(id);
     }
 
-    public void insertOrUpdateCategory(History history) {
+    public void insertOrUpdate(History history) {
         new InsertOrUpdateTask(historyDAO).execute(history);
     }
 
-    public void deleteCategory(History history) {
+    public void delete(History history) {
         new DeleteTask(historyDAO).execute(history);
     }
 

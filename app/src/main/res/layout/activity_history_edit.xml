@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".HistoryEditActivity">
 
-    <TextView
+    <EditText
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,8 +29,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <EditText
+        android:id="@+id/value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -38,7 +38,6 @@
         android:layout_marginEnd="16dp"
         android:hint="@string/value"
         android:inputType="number"
-        android:numeric="decimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />

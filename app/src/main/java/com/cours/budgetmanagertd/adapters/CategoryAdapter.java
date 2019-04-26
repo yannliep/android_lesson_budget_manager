@@ -45,4 +45,9 @@ public class CategoryAdapter extends ArrayAdapter {
 
         return convertView;
     }
+
+    @Override
+    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        return this.getView(position, convertView, parent);
+    }
 }

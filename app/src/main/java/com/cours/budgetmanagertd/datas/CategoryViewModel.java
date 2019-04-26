@@ -32,6 +32,9 @@ public class CategoryViewModel extends AndroidViewModel {
         new InsertOrUpdateTask(categoryDAO).execute(category);
     }
 
+    public void deleteCategory(Category category) {
+
+    }
 
     private static class InsertOrUpdateTask extends
             AsyncTask<Category, Void, Void> {
@@ -49,6 +52,21 @@ public class CategoryViewModel extends AndroidViewModel {
             } else {
                 categoryDAO.insert(category);
             }
+            return null;
+        }
+    }
+
+    private static class DeleteTask extends AsyncTask<Category, Void, Void> {
+        private CategoryDAO categoryDAO;
+
+        public DeleteTask(CategoryDAO categoryDAO) {
+            this.categoryDAO = categoryDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Category... categories) {
+            Category category = categories[0];
+            categoryDAO.delete(category);
             return null;
         }
     }

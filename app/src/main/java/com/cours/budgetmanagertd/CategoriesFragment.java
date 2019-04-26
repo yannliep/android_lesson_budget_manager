@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.cours.budgetmanagertd.adapters.CategoryAdapter;
@@ -52,7 +53,9 @@ public class CategoriesFragment extends Fragment {
         });
 
         categoriesListView = view.findViewById(R.id.categories);
+        categoriesListView.setOnItemClickListener(onClickListener);
 
+        //On met à jour notre liste
         updateList();
 
         return view;
@@ -65,17 +68,19 @@ public class CategoriesFragment extends Fragment {
         viewModel.getAll().observe(this, new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {
+                //On crée un adapter afin d'afficher un objet Category dans notre liste
                 CategoryAdapter adapter = new CategoryAdapter(getContext(), categories);
+                //On injecte l'adapter dans notre liste
                 categoriesListView.setAdapter(adapter);
             }
         });
     }
 
-    private ListView.OnClickListener onClickListener = new ListView.OnClickListener() {
+    private ListView.OnItemClickListener onClickListener = new ListView.OnItemClickListener() {
 
         @Override
-        public void onClick(View v) {
-
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            
         }
     };
 

@@ -31,10 +31,13 @@ public class CategoryEditActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        //On récupère notre ViewModel
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
 
+        //On crée un objet catégorie
         category = new Category();
 
+        //On récupère nos éléments visuels
         nameTextView = findViewById(R.id.name);
         incomeSwitch = findViewById(R.id.income);
     }
@@ -59,9 +62,12 @@ public class CategoryEditActivity extends AppCompatActivity {
     }
 
     private void saveCategory() {
+        //On récupère le nom et le type de catégorie et on les injecte dans le modèle
         category.setName(nameTextView.getText().toString());
         category.setIncome(incomeSwitch.isChecked());
+        //On injecte le modèle dans la base de données
         categoryViewModel.insertOrUpdateCategory(category);
+        //On ferme l'activité
         finish();
     }
 }

@@ -2,8 +2,10 @@ package com.cours.budgetmanagertd;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +42,26 @@ public class CategoryEditActivity extends AppCompatActivity {
         //On récupère nos éléments visuels
         nameTextView = findViewById(R.id.name);
         incomeSwitch = findViewById(R.id.income);
+
+        Intent intent = getIntent();
+        //Si on a un identifiant on prérempli les champs de saisie
+        if (intent.hasExtra(Intent.EXTRA_UID)) {
+            int id = intent.getIntExtra(Intent.EXTRA_UID, 0);
+            if (id > 0) {
+                //On cherche l'identifiant dans la base de données
+                categoryViewModel.getById(id).observe(this, new Observer<Category>() {
+
+                    @Override
+                    public void onChanged(Category categoryFound) {
+                        if (categoryFound != null) {
+                            category = categoryFound;
+                            nameTextView.setText(category.getName());
+                            incomeSwitch.setChecked(category.isIncome());
+                        }
+                    }
+                });
+            }
+        }
     }
 
     @Override

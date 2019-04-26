@@ -80,7 +80,10 @@ public class CategoriesFragment extends Fragment {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            
+            Intent intent = new Intent(getActivity(), CategoryEditActivity.class);
+            Category category = (Category) parent.getItemAtPosition(position);
+            intent.putExtra(Intent.EXTRA_UID, category.getId());
+            startActivity(intent);
         }
     };
 

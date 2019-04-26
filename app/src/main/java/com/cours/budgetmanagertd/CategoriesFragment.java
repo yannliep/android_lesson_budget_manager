@@ -53,11 +53,15 @@ public class CategoriesFragment extends Fragment {
 
         categoriesListView = view.findViewById(R.id.categories);
 
+        updateList();
+
         return view;
     }
 
     private void updateList() {
-        CategoryViewModel viewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        CategoryViewModel viewModel = ViewModelProviders.of(this)
+                .get(CategoryViewModel.class);
+
         viewModel.getAll().observe(this, new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {

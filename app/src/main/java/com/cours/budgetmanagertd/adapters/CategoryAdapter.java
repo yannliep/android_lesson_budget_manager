@@ -34,6 +34,13 @@ public class CategoryAdapter extends ArrayAdapter {
 
         if (category != null) {
             name.setText(category.getName());
+            if (category.isIncome()) {
+                name.setTextColor(convertView.getResources().
+                        getColor(android.R.color.holo_green_light));
+            } else {
+                name.setTextColor(convertView.getResources().
+                        getColor(android.R.color.holo_red_light));
+            }
         }
 
         return convertView;

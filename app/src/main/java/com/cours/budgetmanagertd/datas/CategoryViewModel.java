@@ -33,7 +33,7 @@ public class CategoryViewModel extends AndroidViewModel {
     }
 
     public void deleteCategory(Category category) {
-
+        new DeleteTask(categoryDAO).execute(category);
     }
 
     private static class InsertOrUpdateTask extends

@@ -15,4 +15,5 @@
     <string name="delete_message">Voulez-vous réellement supprimer l\'entrée?</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="date">Date</string>
 </resources>

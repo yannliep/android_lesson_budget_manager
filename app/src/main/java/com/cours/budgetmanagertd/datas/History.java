@@ -1,13 +1,13 @@
 package com.cours.budgetmanagertd.datas;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
+import java.util.Date;
+
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = @ForeignKey(entity = Category.class,
-        parentColumns = "id", childColumns = "categoryId"))
+        parentColumns = "id", childColumns = "categoryId", onDelete = ForeignKey.CASCADE))
 public class History {
 
     @PrimaryKey(autoGenerate = true)
@@ -15,6 +15,7 @@ public class History {
     private int categoryId;
     private String name;
     private float value;
+    private Date date;
 
     public int getId() {
         return id;
@@ -46,5 +47,13 @@ public class History {
 
     public void setValue(float value) {
         this.value = value;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

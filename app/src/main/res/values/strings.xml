@@ -10,4 +10,9 @@
     <string name="value">Valeur</string>
     <string name="save">Sauvegarder</string>
     <string name="income">Entrée</string>
+
+    <string name="delete_title">Suppression</string>
+    <string name="delete_message">Voulez-vous réellement supprimer l\'entrée?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
 </resources>

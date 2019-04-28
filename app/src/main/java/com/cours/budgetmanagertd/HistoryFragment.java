@@ -2,6 +2,7 @@ package com.cours.budgetmanagertd;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -29,6 +31,8 @@ import androidx.lifecycle.ViewModelProviders;
 public class HistoryFragment extends Fragment {
 
     private ListView historyListView;
+
+    private HistoryViewModel viewModel;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -53,6 +57,7 @@ public class HistoryFragment extends Fragment {
         //On récupère la liste et on ajoute la gestion du clic
         historyListView = view.findViewById(R.id.history);
         historyListView.setOnItemClickListener(onItemClickListener);
+        historyListView.setOnItemLongClickListener(onItemLongClickListener);
 
         //On met à jour la liste
         updateList();
@@ -61,7 +66,7 @@ public class HistoryFragment extends Fragment {
     }
 
     private void updateList() {
-        HistoryViewModel viewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
         viewModel.getAll().observe(this, new Observer<List<History>>() {
             @Override
             public void onChanged(List<History> histories) {
@@ -80,6 +85,26 @@ public class HistoryFragment extends Fragment {
             History history = (History) parent.getItemAtPosition(position);
             intent.putExtra(Intent.EXTRA_UID, history.getId());
             startActivity(intent);
+        }
+    };
+
+    private ListView.OnItemLongClickListener onItemLongClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            final AdapterView<?> finalParent = parent;
+            final int finalPosition = position;
+
+            new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.delete_title)
+                    .setMessage(R.string.delete_message)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            History history = (History) finalParent.getItemAtPosition(finalPosition);
+                            viewModel.delete(history);
+                        }
+                    }).setNegativeButton(R.string.no, null).show();
+            return true;
         }
     };
 

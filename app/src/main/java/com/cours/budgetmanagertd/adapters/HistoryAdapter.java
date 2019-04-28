@@ -13,6 +13,8 @@ import com.cours.budgetmanagertd.datas.Category;
 import com.cours.budgetmanagertd.datas.CategoryViewModel;
 import com.cours.budgetmanagertd.datas.History;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -41,10 +43,15 @@ public class HistoryAdapter extends ArrayAdapter {
 
         final TextView name = convertView.findViewById(R.id.name);
         final TextView value = convertView.findViewById(R.id.value);
+        final TextView date = convertView.findViewById(R.id.date);
 
         if (history != null) {
             name.setText(history.getName());
             value.setText(String.valueOf(history.getValue()));
+            if (history.getDate() != null) {
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                date.setText(format.format(history.getDate()));
+            }
             final View finalConvertView = convertView;
             viewModel.getById(history.getCategoryId()).observe((FragmentActivity) getContext(), new Observer<Category>() {
                 @Override

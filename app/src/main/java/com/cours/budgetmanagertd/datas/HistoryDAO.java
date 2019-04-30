@@ -1,5 +1,6 @@
 package com.cours.budgetmanagertd.datas;
 
+import java.util.Date;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
@@ -13,6 +14,19 @@ import androidx.room.Update;
 public interface HistoryDAO {
     @Query("SELECT * FROM history")
     public LiveData<List<History>> getAll();
+
+    @Query("SELECT * FROM history WHERE date >= :startDate AND date <= :endDate")
+    public LiveData<List<History>> getAllBetweenDate(Date startDate, Date endDate);
+
+    @Query("SELECT SUM(value) FROM history, category WHERE " +
+            "history.categoryId = category.id AND date >= :startDate AND date <= :endDate " +
+            "AND income=1")
+    public LiveData<Float> getSumIncomeBetweenDate(Date startDate, Date endDate);
+
+    @Query("SELECT SUM(value) FROM history, category WHERE " +
+            "history.categoryId = category.id AND date >= :startDate AND date <= :endDate " +
+            "AND income=0")
+    public LiveData<Float> getSumOutcomeBetweenDate(Date startDate, Date endDate);
 
     @Query("SELECT * FROM history WHERE id=:id")
     public LiveData<History> getById(int id);

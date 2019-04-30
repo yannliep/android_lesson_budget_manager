@@ -3,6 +3,7 @@ package com.cours.budgetmanagertd.datas;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,14 @@ public class HistoryViewModel extends AndroidViewModel {
 
     public LiveData<List<History>> getAll() {
         return historyDAO.getAll();
+    }
+
+    public LiveData<Float> getSumIncomeBetweenDate(Date startDate, Date endDate) {
+        return historyDAO.getSumIncomeBetweenDate(startDate, endDate);
+    }
+
+    public LiveData<Float> getSumOutcomeBetweenDate(Date startDate, Date endDate) {
+        return historyDAO.getSumOutcomeBetweenDate(startDate, endDate);
     }
 
     public LiveData<History> getById(int id) {

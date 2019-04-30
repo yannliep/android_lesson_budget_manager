@@ -149,7 +149,8 @@ public class HistoryEditActivity extends AppCompatActivity {
         }
     };
 
-    public DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+    public DatePickerDialog.OnDateSetListener onDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             calendar.set(year, month, dayOfMonth);

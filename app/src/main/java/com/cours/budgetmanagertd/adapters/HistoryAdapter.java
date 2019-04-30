@@ -56,12 +56,14 @@ public class HistoryAdapter extends ArrayAdapter {
             viewModel.getById(history.getCategoryId()).observe((FragmentActivity) getContext(), new Observer<Category>() {
                 @Override
                 public void onChanged(Category category) {
-                    if (category.isIncome()) {
-                        value.setTextColor(finalConvertView.getResources().
-                                getColor(android.R.color.holo_green_light));
-                    } else {
-                        value.setTextColor(finalConvertView.getResources().
-                                getColor(android.R.color.holo_red_light));
+                    if (category != null) {
+                        if (category.isIncome()) {
+                            value.setTextColor(finalConvertView.getResources().
+                                    getColor(android.R.color.holo_green_light));
+                        } else {
+                            value.setTextColor(finalConvertView.getResources().
+                                    getColor(android.R.color.holo_red_light));
+                        }
                     }
                 }
             });

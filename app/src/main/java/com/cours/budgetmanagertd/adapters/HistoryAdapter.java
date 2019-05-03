@@ -49,10 +49,11 @@ public class HistoryAdapter extends ArrayAdapter {
 
         if (history != null) {
             name.setText(history.getName());
-            value.setText(String.valueOf(history.getValue()));
+            SharedPreferences sharedPreferences =
+                    PreferenceManager.getDefaultSharedPreferences(getContext());
+            String currency = sharedPreferences.getString("currencies", "€");
+            value.setText(String.valueOf(history.getValue()) + currency);
             if (history.getDate() != null) {
-                SharedPreferences sharedPreferences =
-                        PreferenceManager.getDefaultSharedPreferences(getContext());
                 String pattern = sharedPreferences.getString("date_format", "dd/MM/yyyy");
                 SimpleDateFormat format = new SimpleDateFormat(pattern);
                 date.setText(format.format(history.getDate()));

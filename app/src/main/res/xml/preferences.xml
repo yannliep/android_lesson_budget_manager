@@ -13,10 +13,4 @@
         android:entryValues="@array/date_format"
         android:key="date_format"
         android:title="@string/date_format" />
-    <ListPreference
-        android:defaultValue="1"
-        android:entries="@array/currencies"
-        android:entryValues="@array/currencies"
-        android:key="list_preference_1"
-        android:title="List preference" />
 </PreferenceScreen>

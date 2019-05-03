@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="currencies">
+        <item>€</item>
+        <item>$</item>
+        <item>£</item>
+    </string-array>
+
+    <string-array name="date_format">
+        <item>dd/MM/yyyy</item>
+        <item>yyyy/MM/dd</item>
+        <item>yyyy-MM-dd</item>
+        <item>yy-MM-dd</item>
+    </string-array>
+</resources>

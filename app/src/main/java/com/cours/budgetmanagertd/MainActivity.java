@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,6 +16,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends FragmentActivity {
 
     public static final String TAG = "BudgetManager";
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,7 @@ public class MainActivity extends FragmentActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                invalidateOptionsMenu();
                 switch (menuItem.getItemId()) {
                     case R.id.history:
                         fragmentManager
@@ -46,7 +53,11 @@ public class MainActivity extends FragmentActivity {
                                 .commit();
                         return true;
                     case R.id.settings:
-                        Log.d(TAG, "onNavigationItemSelected: settings");
+                        fragmentManager.
+                                beginTransaction().
+                                replace(R.id.fragment_container, new SettingsFragment()).
+                                addToBackStack("settings").
+                                commit();
                         return true;
                 }
 

@@ -4,9 +4,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.preference.PreferenceManager;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +40,8 @@ public class HistoryEditActivity extends AppCompatActivity {
     private TextView valueTextView;
     private TextView dateTextView;
 
+    private SharedPreferences sharedPreferences;
+
     private Calendar calendar;
 
     @Override
@@ -65,6 +69,7 @@ public class HistoryEditActivity extends AppCompatActivity {
         dateTextView = findViewById(R.id.date);
 
         dateTextView.setOnClickListener(onDateClickListener);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         Intent intent = getIntent();
 
@@ -79,7 +84,8 @@ public class HistoryEditActivity extends AppCompatActivity {
                         nameTextView.setText(history.getName());
                         //On convertit la valeur
                         valueTextView.setText(String.valueOf(history.getValue()));
-                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                        String pattern = sharedPreferences.getString("date_format", "dd/MM/yyyy");
+                        SimpleDateFormat format = new SimpleDateFormat(pattern);
                         Date date;
                         if (history.getDate() != null) {
                             date = history.getDate();
@@ -154,7 +160,8 @@ public class HistoryEditActivity extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             calendar.set(year, month, dayOfMonth);
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String pattern = sharedPreferences.getString("date_format", "dd/MM/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat(pattern);
             dateTextView.setText(format.format(calendar.getTime()));
         }
     };

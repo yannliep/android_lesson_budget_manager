@@ -2,6 +2,8 @@ package com.cours.budgetmanagertd.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +51,10 @@ public class HistoryAdapter extends ArrayAdapter {
             name.setText(history.getName());
             value.setText(String.valueOf(history.getValue()));
             if (history.getDate() != null) {
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                SharedPreferences sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(getContext());
+                String pattern = sharedPreferences.getString("date_format", "dd/MM/yyyy");
+                SimpleDateFormat format = new SimpleDateFormat(pattern);
                 date.setText(format.format(history.getDate()));
             }
             final View finalConvertView = convertView;

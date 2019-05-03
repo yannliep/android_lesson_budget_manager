@@ -67,15 +67,20 @@ public class HistoryFragment extends Fragment {
 
         totalTextView = view.findViewById(R.id.total);
 
+        Calendar calendar = Calendar.getInstance();
         //On met à jour la liste
-        updateList();
+        updateList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH));
 
         return view;
     }
 
-    private void updateList() {
+    public void updateList(int year, int month) {
         viewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
-        viewModel.getAll().observe(this, new Observer<List<History>>() {
+        final Calendar starDate = Calendar.getInstance();
+        starDate.set(year, month, 1);
+        final Calendar endDate = Calendar.getInstance();
+        endDate.set(year, month, endDate.getActualMaximum(Calendar.DAY_OF_MONTH));
+        viewModel.getAllBetweenDate(starDate.getTime(), endDate.getTime()).observe(this, new Observer<List<History>>() {
             @Override
             public void onChanged(List<History> histories) {
                 CategoryViewModel categoryViewModel = ViewModelProviders.of(getActivity()).get(CategoryViewModel.class);
@@ -83,10 +88,6 @@ public class HistoryFragment extends Fragment {
                 historyListView.setAdapter(adapter);
             }
         });
-        final Calendar starDate = Calendar.getInstance();
-        starDate.set(Calendar.DAY_OF_MONTH, 1);
-        final Calendar endDate = Calendar.getInstance();
-        endDate.set(Calendar.DAY_OF_MONTH, endDate.getActualMaximum(Calendar.DAY_OF_MONTH));
         final LifecycleOwner owner = this;
         viewModel.getSumIncomeBetweenDate(starDate.getTime(), endDate.getTime()).observe(owner, new Observer<Float>() {
             @Override

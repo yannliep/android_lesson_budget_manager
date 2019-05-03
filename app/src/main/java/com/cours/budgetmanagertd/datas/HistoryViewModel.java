@@ -23,6 +23,10 @@ public class HistoryViewModel extends AndroidViewModel {
         return historyDAO.getAll();
     }
 
+    public LiveData<List<History>> getAllBetweenDate(Date startDate, Date endDate) {
+        return historyDAO.getAllBetweenDate(startDate, endDate);
+    }
+
     public LiveData<Float> getSumIncomeBetweenDate(Date startDate, Date endDate) {
         return historyDAO.getSumIncomeBetweenDate(startDate, endDate);
     }

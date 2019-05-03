@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/stats"
+        android:icon="@drawable/ic_pie_chart_24dp"
+        android:title="Stats"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/filter"
         android:icon="@drawable/ic_filter_list_24dp"
         android:title="filter"

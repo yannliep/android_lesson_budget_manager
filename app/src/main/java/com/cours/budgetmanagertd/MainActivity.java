@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -64,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             return true;
+        } else if (item.getItemId() == R.id.stats) {
+            Intent intent = new Intent(this, StatsActivity.class);
+            startActivity(intent);
         }
         return false;
     }

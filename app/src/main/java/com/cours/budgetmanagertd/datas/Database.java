@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@androidx.room.Database(entities = {Category.class, History.class}, version = 3)
+@androidx.room.Database(entities = {Category.class, History.class}, version = 3, exportSchema = false)
 @TypeConverters({DateTypeConverter.class})
 public abstract class Database extends RoomDatabase {
     private static Database instance;

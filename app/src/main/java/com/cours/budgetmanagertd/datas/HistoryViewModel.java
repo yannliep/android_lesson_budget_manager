@@ -39,6 +39,10 @@ public class HistoryViewModel extends AndroidViewModel {
         return historyDAO.getById(id);
     }
 
+    public LiveData<Float> getCountByCategory(int cat_id) {
+        return  historyDAO.getCountByCategory(cat_id);
+    }
+
     public void insertOrUpdate(History history) {
         new InsertOrUpdateTask(historyDAO).execute(history);
     }

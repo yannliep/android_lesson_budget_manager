@@ -28,6 +28,9 @@ public interface HistoryDAO {
             "AND income=0")
     public LiveData<Float> getSumOutcomeBetweenDate(Date startDate, Date endDate);
 
+    @Query("SELECT count(*) FROM history WHERE categoryId=:cat_id")
+    public LiveData<Float> getCountByCategory(int cat_id);
+
     @Query("SELECT * FROM history WHERE id=:id")
     public LiveData<History> getById(int id);
 
